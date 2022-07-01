@@ -1,13 +1,15 @@
-from rest_framework.serializers import HyperlinkedModelSerializer
+from rest_framework.serializers import HyperlinkedModelSerializer, ReadOnlyField
 
 from .models import Client, Organization, Bill
 
 
 class ClientSerializer(HyperlinkedModelSerializer):
+    organizations_count = ReadOnlyField()
+    organizations_income = ReadOnlyField()
 
     class Meta:
         model = Client
-        fields = ['id', 'url', 'name']
+        fields = ['id', 'url', 'name', 'organizations_count', 'organizations_income']
 
 
 class OrganizationSerializer(HyperlinkedModelSerializer):

@@ -7,6 +7,17 @@ class Client(models.Model):
     def __str__(self):
         return self.name
 
+    @property
+    def organizations_count(self):
+        return self.organization_set.count()
+
+    @property
+    def organizations_income(self):
+        return sum(
+            organization.bill_set.aggregate(bills_sum=models.Sum('sum'))['bills_sum']
+            for organization in self.organization_set.all()
+        )
+
 
 class Organization(models.Model):
     name = models.CharField(max_length=64)
