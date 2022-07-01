@@ -26,7 +26,7 @@ class Bill(models.Model):
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
     client_number = models.PositiveSmallIntegerField(default=1)
     sum = models.DecimalField(default=0, decimal_places=2, max_digits=7)
-    date = models.DateField(auto_now_add=True)
+    date = models.DateField()
     fraud_score = models.FloatField(default=0)
     service_class = models.PositiveSmallIntegerField(default=1)
     service_name = models.CharField(max_length=32)
