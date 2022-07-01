@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.staticfiles',
 
     'rest_framework',
 
@@ -71,6 +72,12 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Europe/Moscow'
 USE_I18N = True
 USE_TZ = True
+
+STATIC_URL = 'static/'
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
 
 if DEBUG:
     INSTALLED_APPS += [
