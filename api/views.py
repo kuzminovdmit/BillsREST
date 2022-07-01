@@ -17,3 +17,4 @@ class OrganizationViewSet(ModelViewSet):
 class BillViewSet(ModelViewSet):
     queryset = Bill.objects.all()
     serializer_class = BillSerializer
+    filterset_fields = ['organization', 'client']
