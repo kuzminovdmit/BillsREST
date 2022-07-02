@@ -16,10 +16,7 @@ class Client(models.Model):
 
     @property
     def organizations_income(self):
-        return sum(
-            organization.bill_set.aggregate(bills_sum=models.Sum('sum'))['bills_sum']
-            for organization in self.organization_set.all()
-        )
+        return Bill.objects.filter(client__name=self.name).aggregate(models.Sum('sum'))['sum__sum'] or 0
 
 
 class Organization(models.Model):
