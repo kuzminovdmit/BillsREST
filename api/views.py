@@ -32,10 +32,19 @@ class PopulateDatabaseView(APIView):
         })
 
     def post(self, request):
-        populate_client_table()
-        populate_organization_table()
-        populate_bills_table()
+        added = False
+        if not Client.objects.count():
+            populate_client_table()
+            added = True
+
+        if not Organization.objects.count():
+            populate_organization_table()
+            added = True
+
+        if not Bill.objects.count():
+            populate_bills_table()
+            added = True
 
         return Response({
-            'message': 'Успешно добавлены в базу данных из Excel-файлов клиенты, организации и счета',
+            'message': 'Успешно добавлены данные из Excel-файлов' if added else 'Данные уже были добавлены'
         })
