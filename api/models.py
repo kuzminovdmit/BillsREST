@@ -4,6 +4,9 @@ from django.db import models
 class Client(models.Model):
     name = models.CharField(max_length=64, unique=True)
 
+    class Meta:
+        ordering = ['name']
+
     def __str__(self):
         return self.name
 
@@ -27,6 +30,7 @@ class Organization(models.Model):
 
     class Meta:
         unique_together = ['name', 'client']
+        ordering = ['client', 'name']
 
     def __str__(self):
         return self.name
@@ -43,6 +47,7 @@ class Bill(models.Model):
     service_name = models.CharField(max_length=32)
 
     class Meta:
+        ordering = ['client', 'client_number']
         unique_together = ['organization', 'client_number']
 
     def __str__(self):
